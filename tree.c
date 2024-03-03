@@ -18,6 +18,7 @@ int all = 0;
 int size = 0;
 int ign = 0;
 int max_depth = 0;
+int only_dir = 0;
 regex_t ignore;
 
 // apply fnc to all files in dir
@@ -87,13 +88,14 @@ void tree(char *path)
 		indent--;
 		return;
 	}
-	print_file(bsname, indent, siz, 0);
+	if (!only_dir)
+		print_file(bsname, indent, siz, 0);
 }
 
 int main(int argc, char *argv[])
 {
 	int opt;
-	while((opt = getopt(argc, argv, "asi:d:")) != -1)
+	while((opt = getopt(argc, argv, "asoi:d:")) != -1)
 		switch (opt) {
 		case 'a':
 			all = 1;
@@ -107,6 +109,9 @@ int main(int argc, char *argv[])
 				return 1;
 			}
 			ign = 1;
+			break;
+		case 'o':
+			only_dir = 1;
 			break;
 		case 'd':
 			max_depth = atoi(optarg);
