@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/stat.h>
-#include <errno.h>
 #include <regex.h>
 
 #define CLR_YELLOW  "\x1b[33m"
